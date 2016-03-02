@@ -19,7 +19,7 @@ type ngramRecord struct {
 	ngram     []string
 	totalFreq uint64
 	totalVol  uint64
-	yearFreq  map[int][2]uint64
+	yearFreq  map[int][]uint64
 }
 
 func parseNgramRecord(line string) (*ngramRecord, error) {
@@ -38,12 +38,12 @@ func parseNgramRecord(line string) (*ngramRecord, error) {
 	if err != nil {
 		return nil, err
 	}
-	yearFreq := make(map[int][2]uint64)
-	for i := 0; i < len(yf)-2; i += 3 {
+	yearFreq := make(map[int][]uint64)
+	for i := 0; i < len(yf); i += 3 {
 		year := int(yf[i])
 		freq := yf[i+1]
 		vol := yf[i+2]
-		yearFreq[year] = [2]uint64{freq, vol}
+		yearFreq[year] = []uint64{freq, vol}
 	}
 
 	return &ngramRecord{

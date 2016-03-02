@@ -72,7 +72,7 @@ func DecodeFreq(hexString string) ([]uint64, error) {
 // Takes a map of year -> (freq, vol) and returns an array
 // [year1, freq1, vol1, year2, freq2, vol2, ...]
 // where the years are guaranteed to be sorted in ascending order.
-func FreqMapToArray(freq map[int][2]uint64) []uint64 {
+func FreqMapToArray(freq map[int][]uint64) []uint64 {
 	years := make([]int, 0, len(freq))
 	for year, _ := range freq {
 		years = append(years, year)
